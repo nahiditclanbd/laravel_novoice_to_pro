@@ -1,0 +1,33 @@
+# Save Data
+- $company = new Company
+- $company->website = 'test.me';
+- $company->save() //return true
+- $company->website = 'Nahidul.me';
+- $company->save() 
+
+# Get Data
+- Company::take(3)->get()->all()
+- Company::find([1,2,3,4])
+
+# Alternative of where a query
+- Company::where('website', 'www.test.com')->first()
+- Company::whereWebsite('www.test.com')->first()
+
+# Delete the Record without instantiating an object
+- Company::destory(11) //return 1
+- Company::destory([1, 2, 4]) //return 3
+- $company->delete()
+
+# Eloquent insertion and update
+- $company = Company::first()
+- $contact = new contact
+- $company->contact()->save($contact)
+- $company->contact()->create($contact)
+- $contact = [$contact1, $contact2]
+- $company->contact()->saveMany($contact)
+- $company->contact()->createMany($contact)
+
+# Querying Relationships
+- $company->contact()->get() // return all contacts of company
+- $company->contact()->find(7)
+
