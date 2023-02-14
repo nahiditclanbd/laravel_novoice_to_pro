@@ -55,3 +55,7 @@ Company::factory()->has(
   ->count(10)
   ->create()
 
+- We can make above code much simpler by using magic method has[relationship] like so.
+
+Company::factory()->hasContacts(3)->count(10)->create()
+

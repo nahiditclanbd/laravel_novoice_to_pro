@@ -1,0 +1,26 @@
+# Pagination
+- php artisan vendor:publish
+- AppServiceProvider > boot > Paginator::useBootstrap
+- $index + $contact->firstItem()
+
+# Display all companies
+- Company::pluck('id') // return a collection
+- Company::pluck('id')->all() // return actual array
+- Company::orderBy('name')->pluck('id', 'name')->prepand('All Companies', '') // return collection with associative array where name is a key and id is a value
+
+# Filtering
+- script
+document.getElementById('filter_company_id').addEventListener('change', function(){
+    let companyId = this.value || this.options[this.selectedIndex].value
+    window.location.href = window.location.href.split('?')[0]+'?company_id='+companyId
+})
+- Query
+Contact::orderBy('first_name', 'asc')->where(function($query){
+    if($companyId = request('company_id)) {
+        $query->where('company_id', $companyId);
+    }
+
+})->paginate(10);
+- blade
+    {{ $id == request('company_id') ? 'selected' : '' }}
+    {{ $contacts->appends(request()->only('company_id'))->links() }}
